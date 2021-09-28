@@ -96,7 +96,7 @@ class ParsedText extends StatelessWidget {
   Widget build(BuildContext context) {
     // Seperate each word and create a new Array
     String newString = text;
-
+    double actualTextSizeFactor = MediaQuery.textScaleFactorOf(context);
     Map<String, MatchText> _mapping = Map<String, MatchText>();
 
     parse.forEach((e) {
@@ -159,7 +159,9 @@ class ParsedText extends StatelessWidget {
             widget = WidgetSpan(
               alignment: PlaceholderAlignment.middle,
               child: GestureDetector(
-                onTap: mapping.onTap != null ? (() => mapping.onTap!(matchText)) : null,
+                onTap: mapping.onTap != null
+                    ? (() => mapping.onTap!(matchText))
+                    : null,
                 child: mapping.renderWidget!(
                     text: matchText, pattern: mapping.pattern!),
               ),
@@ -210,7 +212,7 @@ class ParsedText extends StatelessWidget {
     return RichText(
       softWrap: softWrap,
       overflow: overflow,
-      textScaleFactor: textScaleFactor,
+      textScaleFactor: actualTextSizeFactor,
       maxLines: maxLines,
       strutStyle: strutStyle,
       textWidthBasis: textWidthBasis,
